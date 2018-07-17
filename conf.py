@@ -26,7 +26,7 @@ author = 'Yves Hilpisch'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.0.3'
 
 
 # -- General configuration ---------------------------------------------------
@@ -158,7 +158,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'mvportfolio', 'mvportfolio Documentation',
-     author, 'mvportfolio', 'One line description of project.',
+     author, 'mvportfolio', 'This is a package for Mean-Variance Portfolio analysis and management.',
      'Miscellaneous'),
 ]
 

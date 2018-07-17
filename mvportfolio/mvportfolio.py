@@ -41,13 +41,14 @@ class MVPPortfolio:
             >>> # from mvportfolio import MVPPortfolio
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> print(p.returns.mean() * 252)
-            .SPX    0.170494
-            .VIX   -0.389339
+            .SPX    0.170378
+            .VIX   -0.153033
             dtype: float64
             >>> print(p.returns.std() * 252 ** 0.5)
-            .SPX    0.066229
-            .VIX    1.080348
+            .SPX    0.066551
+            .VIX    1.087026
             dtype: float64
+            >>>
         '''
 
         self.symbols = symbols
@@ -98,11 +99,12 @@ class MVPPortfolio:
         :Examples:
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> p.portfolio_return(weights=[0.8, 0.2])
-            0.05852761119753065
+            0.10569545399055433
         '''
         if weights is not None:
             self.weights = weights
-            logging.info(self.weights)
+            if self.logger:
+                logging.info(self.weights)
         return np.dot(self.returns.mean() * 252, self.weights)
 
     def portfolio_volatility(self, weights=None):
@@ -115,16 +117,17 @@ class MVPPortfolio:
         :Examples:
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> p.portfolio_volatility(weights=[0.8, 0.2])
-            0.18046067519762432
+            0.1813142102025341
         '''
         if weights is not None:
             self.weights = weights
-            logging.info(self.weights)
+            if self.logger:
+                logging.info(self.weights)
         return np.dot(self.weights, np.dot(self.returns.cov() * 252,
                                            self.weights)) ** 0.5
 
     def minimum_risk_portfolio(self, symbols=None):
-        '''Derives the portfolio weights that minimize the portfolio volatility.
+        ''' Derives the portfolio weights that minimize the portfolio volatility.
 
         :Parameters:
             symbols: list
@@ -134,7 +137,7 @@ class MVPPortfolio:
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> opt = p.minimum_risk_portfolio()
             >>> print('Risk minimizing weights:', opt['x'])
-            Risk minimizing weights: [0.95515639 0.04484361]
+            Risk minimizing weights: [0.95497236 0.04502764]
         '''
         if symbols is not None:
             self.symbols = symbols
@@ -159,4 +162,5 @@ if __name__ == '__main__':
     print('Annualized volatilities:\n', p.returns.std() * 252 ** 0.5)
     print('Correlations:\n', p.returns.corr())
     opt = p.minimum_risk_portfolio(['AAPL.O', 'MSFT.O'])
+    print(p.symbols)
     print('Minimum risk porfolio  :', opt['x'].round(3))

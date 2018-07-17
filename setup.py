@@ -10,7 +10,7 @@ with open('README.md', 'r') as f:
     long_description = f.read()
 
 setup(name='mvportfolio',
-      version='0.0.2',
+      version='0.0.3',
       description='Simple portfolio analysis and management package.',
       long_description=long_description,
       long_description_content_type='text/markdown',
