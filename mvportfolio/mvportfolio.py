@@ -14,14 +14,17 @@ from pylab import plt
 import scipy.optimize as sco
 
 logging.basicConfig(filename='mvp.log',
-        format='%(asctime)s | %(levelname)s | %(message)s',
-        level=logging.INFO)
+                    format='%(asctime)s | %(levelname)s | %(message)s',
+                    level=logging.INFO)
+
 
 class MVPPortfolio:
     ''' Class to analyze and manage investment portfolios
     according to the Mean-Variance Portfolio (MVP) approach.
     '''
-    def __init__(self, symbols, start, end, weights=None, source=None, logger=False):
+
+    def __init__(self, symbols, start, end, weights=None, source=None,
+                 logger=False):
         ''' Initializes an instance of the class.
 
         :Parameters:
@@ -35,6 +38,7 @@ class MVPPortfolio:
                 local or remote CSV data source
 
         :Examples:
+            >>> # from mvportfolio import MVPPortfolio
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> print(p.returns.mean() * 252)
             .SPX    0.170494
@@ -74,9 +78,11 @@ class MVPPortfolio:
             logging.error('Symbol(s) not in data source: %s' % (self.symbols))
             raise ValueError('Symbol(s) not in data source.')
         try:
-            self.data = self.data[(self.data.index >= self.start) & (self.data.index <= self.end)]
+            self.data = self.data[(self.data.index >= self.start) & (
+                self.data.index <= self.end)]
         except:
-            logging.error('Dates not compatible: %s | %s' % (self.start, self.end))
+            logging.error('Dates not compatible: %s | %s' %
+                          (self.start, self.end))
             raise ValueError('Dates not compatible with data source.')
         self.data.dropna(inplace=True)
         self.returns = np.log(self.data / self.data.shift(1))
@@ -114,7 +120,8 @@ class MVPPortfolio:
         if weights is not None:
             self.weights = weights
             logging.info(self.weights)
-        return np.dot(self.weights, np.dot(self.returns.cov() * 252, self.weights)) ** 0.5
+        return np.dot(self.weights, np.dot(self.returns.cov() * 252,
+                                           self.weights)) ** 0.5
 
     def minimum_risk_portfolio(self, symbols=None):
         '''Derives the portfolio weights that minimize the portfolio volatility.
@@ -142,8 +149,10 @@ class MVPPortfolio:
                            bounds=bounds, constraints=constraints)
         return opt
 
+
 if __name__ == '__main__':
-    symbols = ['.SPX', '.VIX', 'GLD'] # , 'PYTHON']
+    doctest.testmod()
+    symbols = ['.SPX', '.VIX', 'GLD']  # , 'PYTHON']
     print(symbols)
     p = MVPPortfolio(symbols, '2017-01-01', '2017-12-31', logger=True)
     print('Annualized mean returns:\n', p.returns.mean() * 252)
@@ -151,4 +160,3 @@ if __name__ == '__main__':
     print('Correlations:\n', p.returns.corr())
     opt = p.minimum_risk_portfolio(['AAPL.O', 'MSFT.O'])
     print('Minimum risk porfolio  :', opt['x'].round(3))
-    doctest.testmod()

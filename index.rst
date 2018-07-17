@@ -14,6 +14,7 @@ mvportfolio --- Simple Portfolio Analytics
 
 
    README.ipynb
+   classes.rst
 
 
 
