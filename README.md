@@ -30,7 +30,7 @@ Open a terminal an execute
 
 Open a terminal and execute
 
-    pip install git+https://github.com/yhilpisch/mvportfolio
+    pip install git+https://github.com/yhilpisch/mvportfolio.git
 
 ### Via `pip` (from PyPi)
 
