@@ -48,12 +48,6 @@ from pylab import plt
 import mvportfolio as mvp
 ```
 
-
-```python
-plt.style.use('seaborn')
-%matplotlib inline
-```
-
 Second, an **instance** of the main class `MVPPortfolio`.
 
 
@@ -115,77 +109,6 @@ opt['x']
 
 
     array([0.93891629, 0.06108371])
-
-
-
-Fifth, **visualization** of the data.
-
-
-```python
-p.data.plot(figsize=(10, 6), secondary_y='.VIX');
-```
-
-
-    
-![png](time_series.png)
-    
-
-
-
-```python
-p.returns.plot.hist(figsize=(10, 6), bins=50, subplots=True);
-```
-
-
-    
-![png](histogram.png)
-    
-
-
-
-```python
-p.returns.corr()
-```
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-    
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>.SPX</th>
-      <th>.VIX</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>.SPX</th>
-      <td>1.000000</td>
-      <td>-0.786778</td>
-    </tr>
-    <tr>
-      <th>.VIX</th>
-      <td>-0.786778</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 
 
 ## Copyright & License
