@@ -47,7 +47,7 @@ class MVPPortfolio:
             .SPX    0.125065
             .VIX    1.188115
             dtype: float64
-            >>> 
+            >>>
         '''
 
         self.symbols = symbols
@@ -117,7 +117,7 @@ class MVPPortfolio:
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2019-01-01', '2019-12-31')
             >>> p.portfolio_volatility(weights=[0.8, 0.2])
             0.1634000261024319
-            >>> 
+            >>>
         '''
         if weights is not None:
             self.weights = weights
@@ -138,7 +138,7 @@ class MVPPortfolio:
             >>> opt = p.minimum_risk_portfolio()
             >>> print('Risk minimizing weights:', opt['x'])
             Risk minimizing weights: [0.91649696 0.08350304]
-            >>> 
+            >>>
         '''
         if symbols is not None:
             self.symbols = symbols
