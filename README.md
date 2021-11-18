@@ -1,24 +1,38 @@
+<img src="http://hilpisch.com/tpq_logo.png" alt="The Python Quants" width="35%" align="right" border="0"><br>
 
+# Case Study
 
-# `mvportfolio`
+## Mean-Variance Portfolio Package
 
-`mvportfolio` is a simplistic Python package to analyze and manage investment portfolios according to the Mean-Variance Portfolio (MVP) theory.
+Dr. Yves J. Hilpisch
 
-<br>
+The Python Quants GmbH
 
-<img src="http://hilpisch.com/images/finaince_visual_low.png" width="350px"> 
+<a href='http://tpq.io'>http://tpq.io</a> | <a href='mailto:training@tpq.io'>training@tpq.io</a>
+
+## `mvportfolio`
+
+`mvportfolio` is a simple Python package to analyze and manage investment portfolios according to the Mean-Variance Portfolio (MVP) theory.
+
+<img src="http://hilpisch.com/images/finaince_visual_low.png" width="300px"> 
 
 ## Installation
 
 ### From Source 
 
-Open a terminal and execute
+Open a terminal an execute
 
     git clone http://github.com/yhilpisch/mvportfolio
     cd mvportfolio
     python setup.py install
 
-### Via `pip`
+### Via `pip` (from Github)
+
+Open a terminal and execute
+
+    pip install git+https://github.com/yhilpisch/mvportfolio
+
+### Via `pip` (from PyPi)
 
 Open a terminal and execute
 
@@ -112,7 +126,9 @@ p.data.plot(figsize=(10, 6), secondary_y='.VIX');
 ```
 
 
-![png](plots/time_series.png)
+    
+![png](time_series.png)
+    
 
 
 
@@ -121,7 +137,55 @@ p.returns.plot.hist(figsize=(10, 6), bins=50, subplots=True);
 ```
 
 
-![png](plots/histogram.png)
+    
+![png](histogram.png)
+    
+
+
+
+```python
+p.returns.corr()
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+    
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>.SPX</th>
+      <th>.VIX</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>.SPX</th>
+      <td>1.000000</td>
+      <td>-0.786778</td>
+    </tr>
+    <tr>
+      <th>.VIX</th>
+      <td>-0.786778</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 
 ## Copyright & License

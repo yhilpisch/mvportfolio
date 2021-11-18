@@ -26,9 +26,9 @@ Create a new one ...
 
     server {
         listen $IP_ADDRESS:80;
-        server_name mvportfolio.YOUR_DOMAIN.COM;
+        server_name mvp.YOUR_DOMAIN.COM;
 
-        root /usr/mvportfolio;
+        root /usr/mvportfolio/html;
         index index.html;
     }
 

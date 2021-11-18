@@ -10,7 +10,6 @@ import logging
 import doctest
 import numpy as np
 import pandas as pd
-from pylab import plt
 import scipy.optimize as sco
 
 logging.basicConfig(filename='mvp.log',
@@ -38,17 +37,17 @@ class MVPPortfolio:
                 local or remote CSV data source
 
         :Examples:
-            >>> # from mvportfolio import MVPPortfolio
-            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
+            >>> from mvportfolio import MVPPortfolio
+            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2019-01-01', '2019-12-31')
             >>> print(p.returns.mean() * 252)
-            .SPX    0.170378
-            .VIX   -0.153033
+            .SPX    0.253435
+            .VIX   -0.523875
             dtype: float64
             >>> print(p.returns.std() * 252 ** 0.5)
-            .SPX    0.066551
-            .VIX    1.087026
+            .SPX    0.125065
+            .VIX    1.188115
             dtype: float64
-            >>>
+            >>> 
         '''
 
         self.symbols = symbols
@@ -60,7 +59,7 @@ class MVPPortfolio:
         else:
             self.weights = weights
         if source is None:
-            self.source = 'http://hilpisch.com/tr_eikon_eod_data.csv'
+            self.source = 'http://hilpisch.com/pyalgo_eikon_eod_data.csv'
         self.logger = logger
         if self.logger:
             logging.info(self.symbols)
@@ -99,7 +98,7 @@ class MVPPortfolio:
         :Examples:
             >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
             >>> p.portfolio_return(weights=[0.8, 0.2])
-            0.10569545399055433
+            0.10569545399055431
         '''
         if weights is not None:
             self.weights = weights
@@ -115,9 +114,10 @@ class MVPPortfolio:
                 weights for the different symbols; if None original weights
 
         :Examples:
-            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
+            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2019-01-01', '2019-12-31')
             >>> p.portfolio_volatility(weights=[0.8, 0.2])
-            0.1813142102025341
+            0.1634000261024319
+            >>> 
         '''
         if weights is not None:
             self.weights = weights
@@ -134,10 +134,11 @@ class MVPPortfolio:
                 symbols that compose the portfolio
 
         :Examples:
-            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2017-01-01', '2017-12-31')
+            >>> p = MVPPortfolio(['.SPX', '.VIX'], '2019-01-01', '2019-12-31')
             >>> opt = p.minimum_risk_portfolio()
             >>> print('Risk minimizing weights:', opt['x'])
-            Risk minimizing weights: [0.95497236 0.04502764]
+            Risk minimizing weights: [0.91649696 0.08350304]
+            >>> 
         '''
         if symbols is not None:
             self.symbols = symbols
@@ -155,12 +156,18 @@ class MVPPortfolio:
 
 if __name__ == '__main__':
     doctest.testmod()
-    symbols = ['.SPX', '.VIX', 'GLD']  # , 'PYTHON']
+    symbols = ['.SPX', '.VIX', 'GLD']
     print(symbols)
-    p = MVPPortfolio(symbols, '2017-01-01', '2017-12-31', logger=True)
-    print('Annualized mean returns:\n', p.returns.mean() * 252)
-    print('Annualized volatilities:\n', p.returns.std() * 252 ** 0.5)
+    p = MVPPortfolio(symbols, '2019-01-01', '2019-12-31', logger=True)
+    print(40 * '=')
+    print('Annualized mean returns:')
+    print(p.returns.mean() * 252)
+    print(40 * '=')
+    print('Annualized volatilities:')
+    print(p.returns.std() * 252 ** 0.5)
+    print(40 * '=')
     print('Correlations:\n', p.returns.corr())
+    print(40 * '=')
     opt = p.minimum_risk_portfolio(['AAPL.O', 'MSFT.O'])
     print(p.symbols)
     print('Minimum risk porfolio  :', opt['x'].round(3))

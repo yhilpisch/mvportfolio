@@ -1,7 +1,7 @@
 The Classes
 ===========
 
-This part of the documentation is automatically generated.
+This part of the Package documentation is automatically generated.
 
 .. autoclass:: mvportfolio.MVPPortfolio     
    :members:

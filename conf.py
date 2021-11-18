@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = 'mvportfolio'
-copyright = '2018, Yves Hilpisch'
+copyright = '2021, Yves Hilpisch'
 author = 'Yves Hilpisch'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.0.3'
+release = '0.0.4'
 
 
 # -- General configuration ---------------------------------------------------
